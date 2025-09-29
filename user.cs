@@ -1,6 +1,6 @@
 namespace App;
 
-class User : IUser // för att user ska ha egenskaper avv IUSER
+class User  // för att user ska ha egenskaper avv IUSER
 {
     public string Email; // för att användarna ska ha sina Email som användarnamn
 

@@ -1,3 +1,4 @@
+/*
 namespace App;
 
 interface IUser
@@ -14,3 +15,4 @@ enum Role
 {
     User,
 }
+*/

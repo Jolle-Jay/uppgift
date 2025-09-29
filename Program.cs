@@ -1,10 +1,11 @@
 ﻿using App;
+using Microsoft.VisualBasic;
 
-List<IUser> users = new List<IUser>();
+List<User> users = new List<User>();
 
-users.Add(new User("JolleJ@gmail.com", "password123"));
+/*users.Add(new User("JolleJ@gmail.com", "password123"));*/
 
-IUser? active_user = null; // en tom plats för att hålla reda på den som är inloggad
+User? active_user = null; // en tom plats för att hålla reda på den som är inloggad
 
 bool running = true;
 
@@ -15,48 +16,77 @@ while (running)
     if (active_user == null)
     {
         Console.Clear();
-        Console.Write("Username:");
-        string username = Console.ReadLine();
+        Console.WriteLine("Press 1 to create account:");
+        Console.WriteLine("Press 2 for login");
+        Console.WriteLine("Press 3 for remove account");
+        string menu = Console.ReadLine();
 
-        Console.Clear();
-        Console.Write("Password");
-        string password = Console.ReadLine();
-        Console.Clear();
-
-
-        foreach (IUser user in users)
+        switch (menu)
         {
-            if (user.TryLogin(username, password))
+            case "1":
+                Console.Clear();
+                Console.WriteLine("Enter you email as username");
+                string new_name = Console.ReadLine();
+                Console.WriteLine("Enter your password for your account");
+                string new_password = Console.ReadLine();
+                users.Add(new User(new_name, new_password));
+                Console.WriteLine("Congratz to your account!");
+                break;
+
+            case "2":
+                Console.Clear();
+                Console.WriteLine("Enter your email to login");
+                string login_name = Console.ReadLine();
+                Console.WriteLine("Enter you password to login");
+                string login_password = Console.ReadLine();
+                foreach (User user in users)
+                {
+                    if (user.TryLogin(login_name, login_password))
+                    {
+                        active_user = user;
+                        break;
+                    }
+                }
+                break;
+
+
+
+
+        }
+
+
+        if (active_user != null)
+        {
+            Console.Clear();
+            Console.WriteLine("Hello" + " " + active_user.Email);
+            Console.WriteLine("Type logout to logout");
+            Console.WriteLine("Type remove to remove account");
+            string menu2 = Console.ReadLine();
+
+            switch (menu2)
             {
-                active_user = user;
-                break;
+                case "logout":
+                    active_user = null;
+                    break;
+
+
+                case "remove":
+                    Console.Clear();
+                    users.Remove(active_user);
+                    Console.WriteLine("Your account is now deleted");
+                    active_user = null;
+                    break;
+
             }
-        }
-    }
-    else
-    {
-        Console.Clear();
-        Console.WriteLine("Welcome to the inventory:");
 
-        switch (active_user.GetRole())
-        {
-            case Role.User:
-                Console.WriteLine("Welcome User");
-                break;
+
         }
 
-        if (active_user.IsRole(Role.User))
-        {
-            Console.WriteLine("Upload information about your item");
-            Console.WriteLine("What type is you item?");
-            string Type = Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine("What Rarity is your item?");
-            string Rarity = Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine("How much damage does it got?");
-            int Damage = int.Parse(Console.ReadLine());
-        }
+
     }
+
+
+
+
 
 }
