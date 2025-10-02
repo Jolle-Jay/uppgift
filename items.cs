@@ -1,15 +1,17 @@
-namespace App;
+// namespace App;
 
-public class Item
-{
-    public string Type;
+// public class Item
+// {
+//     public string Type;
 
-    public string Description;
+//     public string Description;
 
-    public Item(string type, string description)
+//     public string 
 
-    {
-        Type = type;
-        Description = description;
-    }
-}
+//     public Item(string type, string description)
+
+//     {
+//         Type = type;
+//         Description = description;
+//     }
+// }
